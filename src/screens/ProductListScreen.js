@@ -97,7 +97,6 @@ function ProductListScreen() {
                         <th>ID</th>
                         <th>NAME</th>
                         <th>PRICE</th>
-                        {/* <th>CATEGORY</th> */}
                         <th>BRAND</th> 
                         <th></th>
                         </tr>
@@ -110,7 +109,6 @@ function ProductListScreen() {
                                 <td>{product._id}</td>
                                 <td>{product.name}</td>
                                 <td>${product.price}</td>
-                               {/* categry */}
                                 <td>{product.brand}</td>
 
                                 <td>

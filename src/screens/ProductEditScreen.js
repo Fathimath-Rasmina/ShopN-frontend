@@ -19,7 +19,7 @@ function ProductEditScreen() {
     const [price, setPrice] = useState(0)
     const [image, setImage] = useState('')
     const [brand, setBrand] = useState('')
-    const [category, setCategory] = useState('')
+    // const [category, setCategory] = useState('')
     const [countInStock, setCountInStock] = useState(0)
     const [description, setDescription] = useState('')
     const [uploading,setUploading] =useState(false)
@@ -49,7 +49,7 @@ function ProductEditScreen() {
                 setName(product.name)
                 setPrice(product.price)
                 setBrand(product.brand)
-                setCategory(product.category)
+                // setCategory(product.category)
                 setCountInStock(product.countInStock)
                 setDescription(product.description)
 
@@ -68,7 +68,7 @@ function ProductEditScreen() {
             price,
             image,
             brand,
-            category,
+            // category,
             countInStock,
             description
         }))
@@ -180,7 +180,7 @@ function ProductEditScreen() {
                 >
                 </Form.Control>
                 </Form.Group>
-
+{/* 
                 <Form.Group controlId='category'>
                 <Form.Label className='my-3'>Category</Form.Label>
                 <Form.Control
@@ -190,7 +190,7 @@ function ProductEditScreen() {
                     onChange={(e)=>setCategory(e.target.value)}
                 >
                 </Form.Control>
-                </Form.Group>
+                </Form.Group> */}
 
                 <Form.Group controlId='description'>
                 <Form.Label className='my-3'>Description</Form.Label>

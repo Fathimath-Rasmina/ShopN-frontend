@@ -30,7 +30,7 @@ import { USER_LOGIN_REQUEST,
     USER_UPDATE_SUCCESS,
     USER_UPDATE_FAIL,
 } from '../constants/userConstants';
-import axios from 'axios';
+import axios from '../config/axios';
 
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
 

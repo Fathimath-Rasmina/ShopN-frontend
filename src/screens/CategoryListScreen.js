@@ -10,6 +10,8 @@ import { deleteCategory, createCategory,listCategoryProducts } from '../actions/
 import { CATEGORY_CREATE_RESET } from '../constants/productConstants'
 // import Paginate from '../components/Paginate'
 import { useLocation} from 'react-router-dom'
+import Sidebar from '../components/Sidebar'
+
 
 
 function CategoryListScreen() {
@@ -68,7 +70,13 @@ function CategoryListScreen() {
 
   return (
     <div>
-       <Row className='align-items-center'>
+       <Row>
+            <Col md={3} sm={12} className='mb-2'>
+                <Sidebar/>
+            </Col>
+
+            <Col md={9} sm={12}>
+            <Row className='align-items-center'>
             <Col>
                 <h1>Categories</h1>
             </Col>
@@ -77,57 +85,63 @@ function CategoryListScreen() {
                    <i className='fas fa-plus'></i> Create Category
                 </Button>
             </Col>
+            </Row>
+
+            {loadingDelete && <Loader/>}
+            {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+            
+            {loadingCreate && <Loader/>}
+            {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
+
+                {loading 
+                ? (<Loader/>)
+                : error
+                    ? (<Message variant='danger'>{error}</Message>)
+                    : (
+                        <div>
+                        <Table striped bordered hover responsive className='table-sm'>
+                            <thead>
+                                <tr>
+                                <th>ID</th>
+                                <th>NAME</th>
+                                <th>DESCRIPTION</th>
+                                <th></th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+                                {category.map(cat => (
+                                    <tr key={cat.id}>
+                                        <td>{cat.id}</td>
+                                        <td>{cat.category_name}</td>
+                                        <td>{cat.description}</td>
+                                        
+
+                                        <td>
+                                            <LinkContainer to={`/admin/category/${cat.id}/edit`}>
+                                                <Button variant='light' className='btn-sm'>
+                                                    <i className='fas fa-edit'></i>
+                                                </Button>
+                                            </LinkContainer>
+
+                                            <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(cat.id)}>
+                                                    <i className='fas fa-trash'></i>
+                                                </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                        {/* <Paginate pages={pages} page={page} isAdmin={true}/> */}
+                        </div>
+                    )}
+
+            </Col>
+
        </Row>
-
-       {loadingDelete && <Loader/>}
-       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-       
-       {loadingCreate && <Loader/>}
-       {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
-
-        {loading 
-        ? (<Loader/>)
-        : error
-            ? (<Message variant='danger'>{error}</Message>)
-            : (
-                <div>
-                <Table striped bordered hover responsive className='table-sm'>
-                    <thead>
-                        <tr>
-                        <th>ID</th>
-                        <th>NAME</th>
-                        <th>DESCRIPTION</th>
-                        <th></th>
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-                        {category.map(cat => (
-                            <tr key={cat.id}>
-                                <td>{cat.id}</td>
-                                <td>{cat.category_name}</td>
-                                <td>{cat.description}</td>
-                                
-
-                                <td>
-                                    <LinkContainer to={`/admin/category/${cat.id}/edit`}>
-                                        <Button variant='light' className='btn-sm'>
-                                            <i className='fas fa-edit'></i>
-                                        </Button>
-                                    </LinkContainer>
-
-                                    <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(cat.id)}>
-                                            <i className='fas fa-trash'></i>
-                                        </Button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
-                {/* <Paginate pages={pages} page={page} isAdmin={true}/> */}
-                </div>
-            )}
+        
+    
     </div>
   )
 }

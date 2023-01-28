@@ -20,6 +20,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import CategoryListScreen from './screens/CategoryListScreen';
 import CategoryEditScreen from './screens/CategoryEditScreen';
+import DashboardScreen from './screens/DashboardScreen';
 
 
 
@@ -35,6 +36,7 @@ function App() {
               <Route path='/register' element={<RegisterScreens/>}/>
               <Route path='/profile' element={<ProfileScreen/>}/>
               <Route path='/store' element={<StoreScreen/>}/>
+              <Route path='/dashboard' element={<DashboardScreen/>}/>
               <Route path='/login/shipping' element={<Shippingscreen/>}/>
               <Route path='/placeorder' element={<PlaceOrderScreen/>}/>
               <Route path='/order/:id' element={<OrderScreen/>}/>

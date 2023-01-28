@@ -10,6 +10,8 @@ import {listProducts, deleteProduct, createProduct } from '../actions/productAct
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import Paginate from '../components/Paginate'
 import { useLocation} from 'react-router-dom'
+import Sidebar from '../components/Sidebar'
+
 
 
 function ProductListScreen() {
@@ -68,67 +70,85 @@ function ProductListScreen() {
 
   return (
     <div>
-       <Row className='align-items-center'>
-            <Col>
-                <h1>products</h1>
-            </Col>
-            <Col className='text-right'>
-                <Button className='my-3' onClick={createproductHandler}>
-                   <i className='fas fa-plus'></i> Create Product
-                </Button>
-            </Col>
-       </Row>
+    <Row className='align-items-center'>
+        <Col md={3} sm={12} className='my-2'>
+                <Sidebar/>
+        </Col>
+      
+        <Col md={9} sm={12}>   
+            <Row>
+                <Col>
+                    <h1>products</h1>
+                </Col>
+                <Col className='text-right'>
+                        <Button className='my-3' onClick={createproductHandler}>
+                        <i className='fas fa-plus'></i> Create Product
+                        </Button>
+                </Col>
+            </Row>
 
-       {loadingDelete && <Loader/>}
-       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-       
-       {loadingCreate && <Loader/>}
-       {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
+            <Row>
 
-        {loading 
-        ? (<Loader/>)
-        : error
-            ? (<Message variant='danger'>{error}</Message>)
-            : (
-                <div>
-                <Table striped bordered hover responsive className='table-sm'>
-                    <thead>
-                        <tr>
-                        <th>ID</th>
-                        <th>NAME</th>
-                        <th>PRICE</th>
-                        <th>BRAND</th> 
-                        <th></th>
-                        </tr>
+                    
+                {loadingDelete && <Loader/>}
+                {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
 
-                    </thead>
+                {loadingCreate && <Loader/>}
+                {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
 
-                    <tbody>
-                        {products.map(product => (
-                            <tr key={product._id}>
-                                <td>{product._id}</td>
-                                <td>{product.name}</td>
-                                <td>${product.price}</td>
-                                <td>{product.brand}</td>
+                {loading 
+                ? (<Loader/>)
+                : error
+                    ? (<Message variant='danger'>{error}</Message>)
+                    : (
+                        <div>
+                        <Table striped bordered hover responsive className='table-sm'>
+                            <thead>
+                                <tr>
+                                <th>ID</th>
+                                <th>NAME</th>
+                                <th>PRICE</th>
+                                {/* <th>CATEGORY</th> */}
+                                <th>BRAND</th> 
+                                <th></th>
+                                </tr>
 
-                                <td>
-                                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                                        <Button variant='light' className='btn-sm'>
-                                            <i className='fas fa-edit'></i>
-                                        </Button>
-                                    </LinkContainer>
+                            </thead>
 
-                                    <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
-                                            <i className='fas fa-trash'></i>
-                                        </Button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
-                <Paginate pages={pages} page={page} isAdmin={true}/>
-                </div>
-            )}
+                            <tbody>
+                                {products.map(product => (
+                                    <tr key={product._id}>
+                                        <td>{product._id}</td>
+                                        <td>{product.name}</td>
+                                        <td>${product.price}</td>
+                                        {/* <td>{product.category}</td> */}
+                                        <td>{product.brand}</td>
+
+                                        <td>
+                                            <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                                                <Button variant='light' className='btn-sm'>
+                                                    <i className='fas fa-edit'></i>
+                                                </Button>
+                                            </LinkContainer>
+
+                                            <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
+                                                    <i className='fas fa-trash'></i>
+                                                </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                        <Paginate pages={pages} page={page} isAdmin={true}/>
+                        </div>
+                    )}
+            </Row>
+                
+        </Col>
+    </Row>
+        
+            
+            
     </div>
   )
 }

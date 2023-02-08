@@ -55,6 +55,10 @@ import {
     CATEGORY_UPDATE_SUCCESS,
     CATEGORY_UPDATE_FAIL,
     CATEGORY_UPDATE_RESET,
+
+    PRODUCT_FILTER_REQUEST,
+    PRODUCT_FILTER_SUCCESS,
+    PRODUCT_FILTER_FAIL
  } from '../constants/productConstants'
 
 
@@ -301,6 +305,25 @@ export const categoryUpdateReducer = (state = {caetgory:{}}, action) => {
 
         case CATEGORY_UPDATE_RESET:
             return { category:{} }
+
+        default:
+            return state
+        }
+}
+
+export const filterProductReducer = (state = { products:[] }, action) => {
+    switch(action.type){
+        case PRODUCT_FILTER_REQUEST:
+            return {loading:true}
+
+        case PRODUCT_FILTER_SUCCESS:
+                return {loading:false,
+                         success:true,
+                        //  ...state, 
+                         products: action.payload }
+                
+        case PRODUCT_FILTER_FAIL:
+                return {loading:false, error:action.payload} 
 
         default:
             return state

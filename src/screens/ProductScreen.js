@@ -82,7 +82,7 @@ function ProductScreen() {
         <div>
           <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid />
+              <Image src={`https://shopn.jassy.in${product.image}`} alt={product.name} fluid />
             </Col>
 
             <Col md={3}>

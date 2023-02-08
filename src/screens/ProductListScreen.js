@@ -63,11 +63,6 @@ function ProductListScreen() {
         
     }
 
-    const createproductHandler = () =>{
-        //createProduct
-        dispatch(createProduct())
-    }
-
   return (
     <div>
     <Row className='align-items-center'>
@@ -81,9 +76,11 @@ function ProductListScreen() {
                     <h1>products</h1>
                 </Col>
                 <Col className='text-right'>
-                        <Button className='my-3' onClick={createproductHandler}>
+                        <LinkContainer to={'/admin/product/create'}>
+                        <Button className='my-3'>
                         <i className='fas fa-plus'></i> Create Product
                         </Button>
+                        </LinkContainer>
                 </Col>
             </Row>
 

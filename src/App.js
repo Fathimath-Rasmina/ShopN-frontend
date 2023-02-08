@@ -21,6 +21,7 @@ import OrderListScreen from './screens/OrderListScreen';
 import CategoryListScreen from './screens/CategoryListScreen';
 import CategoryEditScreen from './screens/CategoryEditScreen';
 import DashboardScreen from './screens/DashboardScreen';
+import CreateProductScreen from './screens/CreateProductScreen';
 
 
 
@@ -48,6 +49,7 @@ function App() {
               <Route path='/admin/user/:id/edit' element={<UserEditScreen/>}/>
               <Route path='/admin/productlist' element={<ProductListScreen/>}/>
               <Route path='/admin/product/:id/edit' element={<ProductEditScreen/>}/>
+              <Route path='/admin/product/create' element={<CreateProductScreen/>}/>
               <Route path='/admin/orderlist' element={<OrderListScreen/>}/>
               <Route path='/admin/categorylist' element={<CategoryListScreen/>}/>
               <Route path='/admin/category/:id/edit' element={<CategoryEditScreen/>}/>

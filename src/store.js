@@ -14,7 +14,8 @@ import {
      categoryCreateReducer,
      categoryDeleteReducer,
      categoryDetailsReducer,
-     categoryUpdateReducer, } from './reducers/productReducers'
+     categoryUpdateReducer, 
+     filterProductReducer } from './reducers/productReducers'
 import { cartReducer } from './reducers/cartReducers'
 import { 
      userDeleteReducer,
@@ -47,6 +48,7 @@ const reducer = combineReducers({
      categoryDelete:categoryDeleteReducer,
      categoryDetails:categoryDetailsReducer,
      categoryUpdate:categoryUpdateReducer,
+     filterProduct:filterProductReducer,
 
      cart: cartReducer,  
      userLogin: userLoginReducer,

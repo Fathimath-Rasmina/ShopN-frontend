@@ -137,7 +137,7 @@ function OrderScreen() {
                                         <ListGroup.Item key={index}>
                                             <Row>
                                                 <Col md={2}>
-                                                    <Image src={item.image} alt={item.name} fluid rounded />
+                                                    <Image src={`https://shopn.jassy.in${item.image}`} alt={item.name} fluid rounded />
                                                 </Col>
 
                                                 <Col>

@@ -1,52 +1,73 @@
-import React, {  useEffect } from 'react'
-import { Row, Col } from 'react-bootstrap'
-import Product from '../components/Product'
+import React, { useState, useEffect } from 'react'
+import { Button, Row, Col} from "react-bootstrap"
+import { useSelector, useDispatch} from 'react-redux'
+import StoreProduct from '../components/StoreProduct'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { useDispatch,useSelector } from 'react-redux';
-import { listStoreProducts } from '../actions/productActions';
-
-
+import { listCategoryProducts, listStoreProducts } from '../actions/productActions'
+import { useLocation,useNavigate } from 'react-router-dom'
+import { filterProducts } from '../actions/productActions'
 
 function StoreScreen() {
+  const [selectedCategory, setSelectedCategory] = useState('')
+  
 
-    // const{ filter_products } = useFilterContext()
-    // console.log('filtered products', filter_products)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-    const dispatch = useDispatch()
-    const productStore = useSelector(state => state.productStore)
-    const {error,loading,products} = productStore 
-    // console.log('prod',products)
-    // const [searchParams] = useSearchParams()
-  
-    // const location =useLocation()
-    // const keyword = location.search
+  const filterProduct = useSelector((state) => state.filterProduct)
+  const {error,loading, products } = filterProduct
+
+
+  const productCategory = useSelector(state => state.productCategory)
+  const { category } = productCategory
+ 
+  const location = useLocation()
+  const keyword = location.search
+
+  useEffect(() => {
+
+    dispatch(listStoreProducts(selectedCategory))
+    dispatch(listCategoryProducts(keyword))
+    if (selectedCategory) {
+      dispatch(filterProducts(selectedCategory))
+    }
     
-    // console.log('key:',keyword)
-  
-    useEffect(() => {
-    
-      dispatch(listStoreProducts())
-  
-    },[dispatch])
-    
-    
-  
+  }, [dispatch, selectedCategory, keyword])
+
+  const handleCategorySelect = (e) => {
+    setSelectedCategory(e.target.value)    
+  }
+
     return (
+
       <div>
        
-        {/* <FilterSection/> */}
+
           <center><h1>Store</h1></center>
           {loading ? <Loader/>
             : error ? <Message variant='danger'>{error}</Message>
             : 
              <div>
+              <Col>
+              {category.map((cat) => (
+                <Button
+                  key={cat.id}
+                  className="btn-light"
+                  value={cat.category_name}
+                  onClick={handleCategorySelect}
+                >
+                  {cat.category_name}
+                </Button>
+              ))}
+            </Col>
                 <Row>
                 </Row>
-              <Row>
+        
+                 <Row>
                 {products.map(product => (
                     <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                        <Product product={product} />
+                        <StoreProduct product={product} />
                     </Col>
                 ))}
               </Row>
@@ -56,6 +77,6 @@ function StoreScreen() {
       </div>
     )
   }
-  
+
 
 export default StoreScreen

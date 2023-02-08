@@ -51,6 +51,10 @@ import {
     CATEGORY_UPDATE_REQUEST,
     CATEGORY_UPDATE_SUCCESS,
     CATEGORY_UPDATE_FAIL,
+
+    PRODUCT_FILTER_REQUEST,
+    PRODUCT_FILTER_SUCCESS,
+    PRODUCT_FILTER_FAIL
  } from '../constants/productConstants'
 
 
@@ -109,16 +113,17 @@ export const listCategoryProducts = (keyword ='') => async (dispatch,getState) =
             userLogin:{userInfo},
         } = getState()
 
-        const config = {
-            headers:{
-                'Content-type':'application/json',
-                "Authorization": `Bearer ${userInfo.token}`
-            }
-        }
+        // const config = {
+        //     headers:{
+        //         'Content-type':'application/json',
+        //         "Authorization": `Bearer ${userInfo.token}`
+        //     }
+        // }
 
         const { data } = await axios.get(
             `/api/products/category${keyword}`,
-            config)
+            // 
+            )
 
 
         dispatch({
@@ -513,6 +518,38 @@ export const updateCategory = (category) => async (dispatch,getState) =>{
     }catch(error){
         dispatch({
             type:CATEGORY_UPDATE_FAIL,
+            payload:error.response && error.response.data.message
+            ? error.responsedata.message
+            :error.message,
+        })
+    }
+}
+
+
+export const filterProducts = (selectedCategory = '') => async (dispatch,getState) =>{
+    try{
+        dispatch({
+            type:PRODUCT_FILTER_REQUEST
+        })
+
+        const {
+            userLogin:{userInfo},
+        } = getState()
+
+      
+
+        const {data} = await axios.get(
+            `/api/products/filter/?category=${selectedCategory}`,
+            )
+
+        dispatch({
+            type:PRODUCT_FILTER_SUCCESS,
+            payload:data,
+        })
+
+    }catch(error){
+        dispatch({
+            type:PRODUCT_FILTER_FAIL,
             payload:error.response && error.response.data.message
             ? error.responsedata.message
             :error.message,

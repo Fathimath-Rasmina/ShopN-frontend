@@ -49,7 +49,7 @@ function Header() {
                       </NavDropdown>
                     ): ( 
                       <LinkContainer to='/login'>
-                         <Nav.Link ><i className='fas fa-user'></i>Login</Nav.Link>
+                         <Nav.Link ><i className='fas fa-user'></i>Login/Register</Nav.Link>
                       </LinkContainer> 
 
                     )}
